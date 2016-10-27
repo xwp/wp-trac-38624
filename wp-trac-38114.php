@@ -332,7 +332,7 @@ function wp_trac_38144_customize_load_starter_content( WP_Customize_Manager $wp_
 
 	// Options.
 	foreach ( $options as $name => $value ) {
-		if ( preg_match( '/{{(?P<symbol>.+)}}/', $value, $matches ) && isset( $posts[ $matches['symbol'] ] ) ) {
+		if ( preg_match( '/^{{(?P<symbol>.+)}}$/', $value, $matches ) && isset( $posts[ $matches['symbol'] ] ) ) {
 			$value = $posts[ $matches['symbol'] ]['ID'];
 		}
 		$wp_customize->set_post_value( $name, $value );
@@ -340,7 +340,7 @@ function wp_trac_38144_customize_load_starter_content( WP_Customize_Manager $wp_
 
 	// Theme mods.
 	foreach ( $theme_mods as $name => $value ) {
-		if ( preg_match( '/{{(?P<symbol>.+)}}/', $value, $matches ) && isset( $posts[ $matches['symbol'] ] ) ) {
+		if ( preg_match( '/^{{(?P<symbol>.+)}}$/', $value, $matches ) && isset( $posts[ $matches['symbol'] ] ) ) {
 			$value = $posts[ $matches['symbol'] ]['ID'];
 		}
 		$wp_customize->set_post_value( $name, $value );
