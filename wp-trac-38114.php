@@ -85,7 +85,7 @@ function wp_trac_38144_get_theme_starter_content( $stylesheet = null ) {
 
 	if ( 'twentyseventeen' === $stylesheet ) {
 		$starter_content = array(
-			'sidebars_widgets' => array(
+			'widgets' => array(
 				'sidebar-1' => array(
 					array( 'text', array(
 						'title' => __( 'Find Us' ),
@@ -246,7 +246,7 @@ function wp_trac_38144_customize_load_starter_content( WP_Customize_Manager $wp_
 
 	$starter_content = wp_trac_38144_get_theme_starter_content( $wp_customize->get_stylesheet() );
 
-	$sidebars_widgets = isset( $starter_content['sidebars_widgets'] ) && ! empty( $wp_customize->widgets ) ? $starter_content['sidebars_widgets'] : array();
+	$widgets = isset( $starter_content['widgets'] ) && ! empty( $wp_customize->widgets ) ? $starter_content['widgets'] : array();
 	$posts = isset( $starter_content['posts'] ) ? $starter_content['posts'] : array();
 	$options = isset( $starter_content['options'] ) ? $starter_content['options'] : array();
 	$nav_menus = isset( $starter_content['nav_menus'] ) && ! empty( $wp_customize->nav_menus ) ? $starter_content['nav_menus'] : array();
@@ -254,7 +254,7 @@ function wp_trac_38144_customize_load_starter_content( WP_Customize_Manager $wp_
 
 	// Widgets.
 	$max_widget_numbers = array();
-	foreach ( $sidebars_widgets as $sidebar_id => $widgets ) {
+	foreach ( $widgets as $sidebar_id => $widgets ) {
 		$sidebar_widget_ids = array();
 		foreach ( $widgets as $widget ) {
 			list( $id_base, $instance ) = $widget;
