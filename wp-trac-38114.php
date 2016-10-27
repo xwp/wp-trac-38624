@@ -88,16 +88,20 @@ function wp_trac_38144_get_theme_starter_content( $stylesheet = null ) {
 			'sidebars_widgets' => array(
 				'sidebar-1' => array(
 					array( 'text', array(
-						'title' => __( 'Find Us (Sidebar)' ),
+						'title' => __( 'Find Us' ),
 						'text' => join( '', array(
 							'<p><strong>' . __( 'Address' ) . '</strong><br />',
 							__( '123 Main Street' ) . '<br />' . __( 'New York, NY 10001' ) . '</p>',
 							'<p><strong>' . __( 'Hours' ) . '</strong><br />',
-							__( 'Monday&mndash;Friday: 9:00AM&ndash;5:00PM' ) . '<br />' . __( 'Saturday &amp; Sunday: 11:00AM&ndash;3:00PM' ) . '</p>'
+							__( 'Monday&mdash;Friday: 9:00AM&ndash;5:00PM' ) . '<br />' . __( 'Saturday &amp; Sunday: 11:00AM&ndash;3:00PM' ) . '</p>'
 						) ),
 					) ),
 					array( 'search', array(
 						'title' => __( 'Site Search' ),
+					) ),
+					array( 'text', array(
+						'title' => __( 'Site Credits' ),
+						'text' => sprintf( __( 'This site was created on %s' ), get_date_from_gmt( current_time( 'mysql', 1 ), 'c' ) ),
 					) ),
 				),
 
