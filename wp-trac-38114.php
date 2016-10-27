@@ -87,80 +87,26 @@ function wp_trac_38144_get_theme_starter_content( $stylesheet = null ) {
 		$starter_content = array(
 			'sidebars_widgets' => array(
 				'sidebar-1' => array(
-					array( 'text', array(
-						'title' => __( 'Find Us' ),
-						'text' => join( '', array(
-							'<p><strong>' . __( 'Address' ) . '</strong><br />',
-							__( '123 Main Street' ) . '<br />' . __( 'New York, NY 10001' ) . '</p>',
-							'<p><strong>' . __( 'Hours' ) . '</strong><br />',
-							__( 'Monday&mdash;Friday: 9:00AM&ndash;5:00PM' ) . '<br />' . __( 'Saturday &amp; Sunday: 11:00AM&ndash;3:00PM' ) . '</p>'
-						) ),
-					) ),
-					array( 'search', array(
-						'title' => __( 'Site Search' ),
-					) ),
-					array( 'text', array(
-						'title' => __( 'Site Credits' ),
-						'text' => sprintf( __( 'This site was created on %s' ), get_date_from_gmt( current_time( 'mysql', 1 ), 'c' ) ),
-					) ),
+					'text_business_info',
+					'search',
+					'text_credits',
 				),
 
 				'sidebar-2' => array(
-					array( 'text', array(
-						'title' => __( 'Footer 1 text widget' ),
-						'text' => __( 'Hello world' ),
-					) ),
+					'text_business_info',
 				),
 
 				'sidebar-3' => array(
-					array( 'text', array(
-						'title' => __( 'Footer 2 text widget' ),
-						'text' => __( 'Hello world' ),
-					) ),
+					'text_credits',
 				),
 			),
 
 			'posts' => array(
-				'home' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Homepage' ),
-					'post_content' => __( 'Welcome home.' ),
-				),
-				'about-us' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'About Us' ),
-					'post_content' => __( 'More than you ever wanted to know.' ),
-				),
-				'contact-us' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Contact Us' ),
-					'post_content' => __( 'Call us at 999-999-9999.' ),
-				),
-				'blog' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Blog' ),
-				),
-
-				'panel_1' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'First' ),
-					'post_content' => __( 'First panel content' ),
-				),
-				'panel_2' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Second' ),
-					'post_content' => __( 'Second panel content' ),
-				),
-				'panel_3' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Third' ),
-					'post_content' => __( 'Third panel content' ),
-				),
-				'panel_4' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Fourth' ),
-					'post_content' => __( 'Fourth panel content' ),
-				),
+				'home',
+				'about-us',
+				'contact-us',
+				'blog',
+				'homepage-section',
 			),
 
 			'options' => array(
@@ -170,68 +116,39 @@ function wp_trac_38144_get_theme_starter_content( $stylesheet = null ) {
 			),
 
 			'theme_mods' => array(
-				'panel_1' => '{{panel_1}}',
-				'panel_2' => '{{panel_2}}',
-				'panel_3' => '{{panel_3}}',
-				'panel_4' => '{{panel_4}}',
+				'panel_1' => '{{homepage-section}}',
+				'panel_2' => '{{about-us}}',
+				'panel_3' => '{{blog}}',
+				'panel_4' => '{{contact-us}}',
 			),
 
 			'nav_menus' => array(
 				'top' => array(
 					'name' => __( 'Top' ),
 					'items' => array(
-						array(
-							'type' => 'post_type',
-							'object' => 'page',
-							'object_id' => 'home',
-						),
-						array(
-							'type' => 'post_type',
-							'object' => 'page',
-							'object_id' => 'about-us',
-						),
-						array(
-							'type' => 'post_type',
-							'object' => 'page',
-							'object_id' => 'blog',
-						),
-						array(
-							'type' => 'post_type',
-							'object' => 'page',
-							'object_id' => 'contact-us',
-						),
+						'page_home',
+						'page_about',
+						'page_blog',
+						'page_contact',
 					),
 				),
 				'social' => array(
 					'name' => __( 'Social' ),
 					'items' => array(
-						array(
-							'title' => __( 'Yelp' ),
-							'url' => 'https://www.yelp.com',
-						),
-						array(
-							'title' => __( 'Facebook' ),
-							'url' => 'https://www.facebook.com/wordpress',
-						),
-						array(
-							'title' => __( 'Twitter' ),
-							'url' => 'https://twitter.com/wordpress',
-						),
-						array(
-							'title' => __( 'Instagram' ),
-							'url' => 'https://www.instagram.com/explore/tags/wordcamp/',
-						),
-						array(
-							'title' => __( 'Email' ),
-							'url' => 'mailto:wordpress@example.com',
-						),
+						'link_yelp',
+						'link_facebook',
+						'link_twitter',
+						'link_instagram',
+						'link_email',
 					),
 				),
 			),
 		);
+
+		add_theme_support( 'starter-content', $starter_content );
 	}
 
-	$starter_content = apply_filters( 'customize_theme_starter_content', $starter_content, $stylesheet );
+	$starter_content = get_theme_starter_content();
 
 	return $starter_content;
 }
