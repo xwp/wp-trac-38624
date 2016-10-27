@@ -17,6 +17,8 @@ function wp_trac_38144_customize_register( WP_Customize_Manager $wp_customize ) 
 	add_action( 'customize_controls_enqueue_scripts', 'wp_trac_38144_customize_controls_enqueue_scripts' );
 	add_action( 'customize_controls_print_footer_scripts', 'wp_trac_38144_print_templates' );
 	add_action( 'wp_ajax_customize_load_dummy_content', 'wp_trac_38144_ajax_customize_load_dummy_content' );
+
+	wp_trac_38144_insert_dummy_posts( $wp_customize );
 }
 add_action( 'customize_register', 'wp_trac_38144_customize_register' );
 
@@ -87,4 +89,45 @@ function wp_trac_38144_customize_load_dummy_content( WP_Customize_Manager $wp_cu
 	// @todo The main logic for loading dummy content goes here.
 
 	return $wp_customize->save_changeset_post();
+}
+
+/**
+ * Insert dummy auto_draft posts.
+ *
+ * @todo Move $dummy_post_titles into a separate file or getter function.
+ *
+ * @param WP_Customize_Manager $wp_customize Manager.
+ * @return array Newly inserted post IDs.
+ */
+function wp_trac_38144_insert_dummy_posts( $wp_customize ) {
+
+	$dummy_post_titles = array(
+		__( 'This Is A Blog Post' ),
+		__( 'Another Example Post Title' ),
+		__( 'A Placeholder Post' ),
+		__( 'Another Placeholder Post' ),
+	);
+
+	$new_post_ids = array();
+	foreach ( $dummy_post_titles as $post_title ) {
+		$new_post = $wp_customize->nav_menus->insert_auto_draft_post( array(
+			'post_type' => 'post',
+			'post_title' => $post_title,
+		) );
+		if ( isset( $new_post->ID ) ) {
+			array_push( $new_post_ids, $new_post->ID );
+		}
+	}
+
+	$existing_post_setting = $wp_customize->get_setting( 'nav_menus_created_posts' );
+	if ( ( null !== $existing_post_setting ) && is_array( $existing_post_setting->post_value() ) ) {
+		$existing_post_ids = $existing_post_setting->post_value();
+		$merged_post_ids = array_merge( $new_post_ids, $existing_post_ids );
+	} else {
+		$merged_post_ids = $new_post_ids;
+	}
+	$wp_customize->set_post_value( 'nav_menus_created_posts', $merged_post_ids );
+
+	return $new_post_ids;
+
 }
