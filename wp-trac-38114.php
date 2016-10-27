@@ -157,11 +157,6 @@ function wp_trac_38144_get_theme_starter_content( $stylesheet = null ) {
 					'post_title' => __( 'Fourth' ),
 					'post_content' => __( 'Fourth panel content' ),
 				),
-				'panel_5' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Fifth' ),
-					'post_content' => __( 'Fifth panel content' ),
-				),
 			),
 
 			'options' => array(
