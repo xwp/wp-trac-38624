@@ -1,0 +1,15 @@
+
+
+#customize-theme-controls .control-panel-themes.has-starter-content {
+	margin-bottom: 15px;
+
+}
+
+#customize-theme-controls .control-panel-themes.has-starter-content > .accordion-section-title {
+	margin-bottom: 0;
+}
+
+#customize-theme-controls .control-panel-themes.has-starter-content .theme-starter-content-actions {
+	background: white;
+	padding: 10px 12px 10px 12px;
+}
