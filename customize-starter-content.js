@@ -2,7 +2,7 @@
 ( function( api, $ ) {
 
 	api.bind( 'ready', function () {
-		api.panel( 'themes', function( panel ) {
+		api.section( 'themes', function( panel ) {
 			panel.deferred.embedded.done( function() {
 				var starterContentRow;
 				panel.headContainer.addClass( 'has-starter-content' );
